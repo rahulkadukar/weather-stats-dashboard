@@ -21,8 +21,10 @@ async function sqlQuery(query) {
     dbData.returnCode = -1
     dbData.errMessage = excp.message ? excp.message : `ERROR IN: [${query}]`
   } finally {
-    return dbData
+    // Do nothing
   }
+
+  return dbData
 }
 
 exports.sqlQuery = sqlQuery

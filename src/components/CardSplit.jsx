@@ -1,11 +1,11 @@
-import React, { Component , useState } from 'react'
+import React from 'react'
 import ThemeContext from '../core/ThemeContext.jsx'
 import styled from 'styled-components'
 
 const DivStyled = styled.div`
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0,0,0,1);
-  color: ${props => props.theme === 'light' ? '#ECEFF1' : 'black'};
+  color: ${props => props.theme === 'light' ? 'black' : 'black'};
   flex: 1 1 0px;
   max-width: 240px;
   display: flex;
@@ -19,14 +19,14 @@ const DivStyled = styled.div`
 `
 
 const CardHeader = styled.div`
-  background-color: #f44336;
+  background-color: #26c6da;
   padding: 10px;
   height: 20px;
   font-size: 20px;
 `
 
 const CardBody = styled.div`
-  background-color: #e57373;
+  background-color: #b3e5fc;
   padding: 10px;
   flex: 1;
   font-size: 50px;

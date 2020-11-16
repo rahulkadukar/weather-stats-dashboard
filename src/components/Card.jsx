@@ -1,6 +1,12 @@
-import React, { Component , useState } from 'react'
+import React from 'react'
 import ThemeContext from '../core/ThemeContext.jsx'
 import styled from 'styled-components'
+
+const colorList = {
+  green: {h: '#2e7d32', b: '#81c784'},
+  orange: {h: '#f57c00', b: '#ffb74d'},
+  red: {h: '#f44336', b: '#e57373' }
+}
 
 const DivStyled = styled.div`
   border-radius: 2px;
@@ -17,13 +23,13 @@ const DivStyled = styled.div`
 `
 
 const CardBody = styled.div`
-  background-color: #e57373;
+  background-color: ${props => colorList[props.color] ? colorList[props.color].b : '#fff'};
   padding: 10px;
   font-size: 200px;
 `
 
 const CardHeader = styled.div`
-  background-color: #f44336;
+  background-color: ${props => colorList[props.color] ? colorList[props.color].h : '#fff'};
   padding: 10px;
   font-size: 20px;
 `
@@ -32,10 +38,10 @@ const Card = (props) => {
   return <ThemeContext.Consumer>
     { (value) =>
         <DivStyled {...value} {...props}>
-          <CardHeader>
+          <CardHeader {...props} >
             {props.header}
           </CardHeader>
-          <CardBody>
+          <CardBody {...props} >
             {props.children}
           </CardBody>
         </DivStyled>

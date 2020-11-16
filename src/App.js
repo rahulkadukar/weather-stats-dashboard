@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import ThemeContext from './core/ThemeContext'
 import {
-  Link as ReactRouterLink,
   BrowserRouter as Router,
   Route,
   Switch
@@ -38,6 +37,16 @@ const Navbar = styled.div`
 
 const App = (props) => {
   const url = `/api/fetchSummary`
+
+  const initData = {
+    numberOfCities: 0,
+    processed: [],
+    summaryData: [],
+    unProcessed: []
+  }
+
+  const [ weatherData, updateWeather ] = useState(initData)
+
   useEffect(() => {
     fetch(url, {
       method: 'POST',
@@ -46,10 +55,16 @@ const App = (props) => {
       }
     }).then((response) => {
       return response.json()
-    })
-        .then((json) => {
-          console.log(json)
+    }).then((d) => {
+      if (d.returnCode === 0) {
+        const dbData = {}
+        const keys = ['numberOfCities', 'processed', 'summaryData', 'unProcessed']
+        keys.forEach((k) => {
+          dbData[k] = d[k]
         })
+        updateWeather(dbData)
+      }
+    })
   },[url])
 
   return <ThemeContext.Consumer>
@@ -62,7 +77,7 @@ const App = (props) => {
           </Navbar>
           <Container>
             <Switch>
-              <Route exact path="/"><Home /></Route>
+              <Route exact path="/"><Home data={weatherData}/></Route>
             </Switch>
           </Container>
         </Main>
