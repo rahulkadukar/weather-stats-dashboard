@@ -1,9 +1,0 @@
-const pgConnection = {
-  user: 'dbuser',
-  host: '172.16.1.100',
-  database: 'testdb',
-  password: 'Winter10',
-  port: 5432
-}
-
-exports.dbConnection = pgConnection
