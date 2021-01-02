@@ -98,14 +98,15 @@ const Home = (props) => {
     const tempObj = {}
     tempObj.data = Object.assign({}, { name: k }, v)
     w.cityList.push(tempObj)
+    const percentDone = parseFloat((v.y * 100 / (v.n + v.y)).toFixed(2))
 
-    if ((v.y * 100 / (v.n + v.y)).toFixed(2) < w.stats.min) {
-      w.stats.min = (v.y * 100 / (v.n + v.y)).toFixed(2)
+    if (percentDone < w.stats.min) {
+      w.stats.min = percentDone
       w.stats.minCity = `${capitalizeCity(k)} [Least done]`
     }
 
-    if ((v.y * 100 / (v.n + v.y)).toFixed(2) > w.stats.max) {
-      w.stats.max = (v.y * 100 / (v.n + v.y)).toFixed(2)
+    if (percentDone > w.stats.max) {
+      w.stats.max = percentDone
       w.stats.maxCity = `${capitalizeCity(k)} [Most done]`
     }
     w.stats.y += v.y
